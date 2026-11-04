@@ -1,0 +1,27 @@
+# =============================================================
+# Chest X-ray Mathematical Lab — Python Dependencies (Phase 1)
+# Installed inside conda env `xraylab` (Python 3.11)
+# =============================================================
+
+# ---- Web application ----
+streamlit==1.36.0
+
+# ---- Numerical / scientific computing ----
+numpy==1.26.4
+scipy==1.13.1
+scikit-image==0.23.2
+scikit-learn==1.5.0
+
+# ---- Image I/O ----
+opencv-python-headless==4.10.0.84
+Pillow==10.3.0
+
+# ---- Visualization ----
+matplotlib==3.9.0
+plotly==5.22.0
+
+# ---- Reporting / tabular output ----
+pandas==2.2.2
+
+# ---- Testing ----
+pytest==8.2.2

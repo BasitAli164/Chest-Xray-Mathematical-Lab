@@ -1,0 +1,19 @@
+# Streamlit runtime configuration
+# Docs: https://docs.streamlit.io/library/advanced-features/configuration
+
+[theme]
+base = "light"
+primaryColor = "#0B6E99"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#262730"
+font = "sans serif"
+
+[server]
+# Max upload size in MB — matches MAX_FILE_SIZE_MB in core/image_loader.py
+maxUploadSize = 15
+enableXsrfProtection = true
+enableCORS = true
+
+[browser]
+gatherUsageStats = false
