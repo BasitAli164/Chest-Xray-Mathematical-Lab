@@ -1,4 +1,4 @@
-"""Chest X-ray Mathematical Lab — Linear Algebra Image Processing.
+"""Image Mathematical Lab — Linear Algebra Image Processing.
 
 Phase 6 (final) entry point. All modules are now available via the
 sidebar navigation under `pages/`:
@@ -35,8 +35,8 @@ from mathematical_engine.trace_manager import TraceManager
 
 
 st.set_page_config(
-    page_title="Chest X-ray Mathematical Lab",
-    page_icon="🩻",
+    page_title=" Image Processing Mathematical Lab",
+    page_icon="🖼️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -70,31 +70,23 @@ def _render_matrix_preview(arr: np.ndarray, n_rows: int = 6,
 
 def _render_sidebar_uploader() -> None:
     with st.sidebar:
-        st.markdown("## 📤 Upload Chest X-ray")
+        st.markdown("## 📤 Upload Image")
         uploaded = st.file_uploader(
             "PNG, JPG or JPEG · max 15 MB",
             type=["png", "jpg", "jpeg"],
             accept_multiple_files=False,
             key="main_uploader",
         )
-        st.divider()
-        st.markdown("### ⚠️ Disclaimer")
-        st.markdown(
-            "**Educational and mathematical use only.** This application "
-            "demonstrates linear-algebra techniques on chest X-ray images. "
-            "It is **not** a medical device and must **never** be used for "
-            "clinical diagnosis."
-        )
+       
         st.divider()
         st.markdown("### ℹ️ About")
         st.markdown(
-            "An interactive **Linear Algebra sandbox** for chest X-ray "
+            "An interactive **Linear Algebra sandbox** for image "
             "image processing. Every operation exposes its actual "
             "mathematical trace — formulas, derivations, pixel-level "
             "inspection."
         )
         st.divider()
-        st.caption("Phase 6 · Final · All modules available")
 
         if uploaded is not None:
             try:
@@ -133,23 +125,21 @@ def _render_sidebar_uploader() -> None:
 
 _render_sidebar_uploader()
 
-st.title("🩻 Chest X-ray Mathematical Lab")
+st.title("🩻 Image Mathematical Lab")
 st.markdown(
     "**Linear Algebra-based Image Processing & Enhancement** · "
-    "*Educational sandbox*"
 )
 
 st.info(
     "This application demonstrates **mathematical** linear-algebra "
-    "techniques on chest X-ray images. **Not a medical device.** "
-    "Never use for clinical diagnosis."
+    "techniques on images."
 )
 
 gray = st.session_state.gray_image
 meta = st.session_state.metadata
 
 if gray is None:
-    st.warning("⬅️ **Upload a chest X-ray in the sidebar** to begin.")
+    st.warning("⬅️ **Upload an image in the sidebar** to begin.")
     st.markdown(
         """
         ### Explore all modules (sidebar navigation)

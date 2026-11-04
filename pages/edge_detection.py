@@ -219,6 +219,7 @@ with left:
 # ---------------------------------------------------------------------------
 # RIGHT: unified workspace
 # ---------------------------------------------------------------------------
+
 with right:
     st.subheader("🧮 Mathematical workspace")
     if last is None:

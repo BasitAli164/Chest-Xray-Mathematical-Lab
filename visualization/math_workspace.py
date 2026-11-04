@@ -9,11 +9,6 @@ displays the three transparency levels in tabs:
 
 All data comes from a Trace dict produced by TraceManager. This module
 never recomputes values.
-
-Usage in a page
----------------
-    from visualization.math_workspace import render
-    render(trace.to_dict(), key_prefix="enhancement")
 """
 
 from __future__ import annotations
@@ -112,23 +107,36 @@ def _render_level2(
     total = ctrl.total
     idx = ctrl.current_index
 
-    # Navigation row
+    # Navigation row (Compact Emoji Buttons)
     nav1, nav2, nav3, nav4 = st.columns([1, 1, 1, 3])
-    if nav1.button("◀ Prev", key=f"{key_prefix}_prev",
-                   disabled=ctrl.is_first):
-        ctrl.prev()
-        idx = ctrl.current_index
-    if nav2.button("Next ▶", key=f"{key_prefix}_next",
-                   disabled=ctrl.is_last):
-        ctrl.next()
-        idx = ctrl.current_index
-    if nav3.button("Reset", key=f"{key_prefix}_reset"):
-        ctrl.reset()
-        idx = ctrl.current_index
-    nav4.progress(
-        max(0.0, ctrl.progress),
-        text=f"Step {max(1, idx + 1)} of {total}",
-    )
+
+    with nav1:
+        if st.button("⬅️", key=f"{key_prefix}_prev",
+                     disabled=ctrl.is_first, use_container_width=True,
+                     help="Previous Step"):
+            ctrl.prev()
+            idx = ctrl.current_index
+
+    with nav2:
+        if st.button("➡️", key=f"{key_prefix}_next",
+                     disabled=ctrl.is_last, use_container_width=True,
+                     type="primary", help="Next Step"):
+            ctrl.next()
+            idx = ctrl.current_index
+
+    with nav3:
+        if st.button("🔄", key=f"{key_prefix}_reset", 
+                     use_container_width=True, help="Reset to Step 1"):
+            ctrl.reset()
+            idx = ctrl.current_index
+
+    with nav4:
+        st.progress(
+            max(0.0, ctrl.progress),
+            text=f"Step {max(1, idx + 1)} of {total}",
+        )
+    
+    st.write("") # Spacing
 
     # Step body
     step = ctrl.current()
@@ -229,6 +237,7 @@ def render(
         tab_labels.append("🔬 Level 3 — Deep")
 
     tabs = st.tabs(tab_labels)
+    
     with tabs[0]:
         _render_level1(trace)
     with tabs[1]:
@@ -236,3 +245,31 @@ def render(
     if has_l3:
         with tabs[2]:
             _render_level3(trace)
+
+    # =========================================================
+    # NAYA FEATURE: AI POWERED EXPLANATION (Added at the end)
+    # =========================================================
+    st.divider()
+    
+    # Session state mein AI response save karenge taake bar bar API call na ho
+    ai_state_key = f"{key_prefix}_ai_explanation"
+    current_op_id = trace.get("operation_id", "")
+    
+    # Agar naya operation chala hai, toh purana AI response clear kar dein
+    if st.session_state.get(f"{key_prefix}_last_op_id") != current_op_id:
+        st.session_state[ai_state_key] = None
+        st.session_state[f"{key_prefix}_last_op_id"] = current_op_id
+
+    with st.expander("🤖 AI-Powered Simple Explanation (Non-Technical)", expanded=False):
+        st.caption("Generative AI will explain what just happened in simple words, based strictly on the actual numbers.")
+        
+        # Button check karein
+        if st.button("✨ Generate Simple Explanation", key=f"{key_prefix}_ai_btn", type="secondary"):
+            with st.spinner("AI is analyzing the math..."):
+                from core.ai_explainer import generate_explanation
+                explanation = generate_explanation(trace)
+                st.session_state[ai_state_key] = explanation
+        
+        # Agar response mojood hai toh dikhayen
+        if st.session_state.get(ai_state_key):
+            st.info(st.session_state[ai_state_key])

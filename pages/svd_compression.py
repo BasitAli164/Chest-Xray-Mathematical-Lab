@@ -157,11 +157,8 @@ with right:
                 "mathematical transparency appear here.")
     else:
         m1, m2, m3 = st.columns(3)
-        m1.metric("Relative error",
-                  f"{res.relative_error:.4f}")
-        m2.metric("PSNR (dB)",
-                  f"{errs.get('psnr_db', 0.0):.2f}"
-                  if np.isfinite(errs.get("psnr_db", 0.0)) else "∞")
+        m1.metric("Relative error", f"{res.relative_error:.4f}")
+        m2.metric("PSNR (dB)", f"{errs.get('psnr_db', 0.0):.2f}" if np.isfinite(errs.get("psnr_db", 0.0)) else "∞")
         m3.metric("Compression", f"{res.compression_ratio:.2f}×")
 
         with st.expander("🎯 Top singular values", expanded=False):
@@ -169,11 +166,7 @@ with right:
 
         with st.expander("🔢 Matrix summaries", expanded=False):
             U, S, Vt = res.U, res.S, res.Vt
-            st.markdown(
-                f"**U** {U.shape}  \n"
-                f"**Σ** {S.shape}  \n"
-                f"**Vt** {Vt.shape}"
-            )
+            st.markdown(f"**U** {U.shape}  \n**Σ** {S.shape}  \n**Vt** {Vt.shape}")
             c1, c2 = st.columns(2)
             c1.markdown("**U (5×5)**")
             c1.dataframe(U[:5, :5], use_container_width=False)
@@ -181,4 +174,5 @@ with right:
             c2.dataframe(Vt[:5, :5], use_container_width=False)
             st.write("**Σ top-5**", [float(x) for x in S[:5]])
 
+        # Yahan render_math call ho raha hai
         render_math(last, key_prefix="svd")

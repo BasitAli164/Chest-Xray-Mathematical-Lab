@@ -256,3 +256,14 @@ else:
             f"{t.operation_id} · {t.execution_time_ms:.2f} ms"
         ):
             st.json(t.to_dict())
+# ---------------------------------------------------------------------------
+# AI EXPLANATION SECTION (Added for Feature Analysis)
+# ---------------------------------------------------------------------------
+st.divider()
+last_trace = st.session_state.get("feat_last_trace")
+
+if last_trace:
+    st.subheader("🧮 Mathematical workspace")
+    # Yahan hum math_workspace ka render function call kar rahe hain
+    from visualization.math_workspace import render as render_math
+    render_math(last_trace, key_prefix="feat")
