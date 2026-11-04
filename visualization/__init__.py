@@ -1,16 +1,14 @@
-"""Plotting and display helpers.
+"""Visualization helpers — thin wrappers over matplotlib / st.image.
 
 Contract
 --------
-- Pure functions that return matplotlib figures or numpy arrays
-  suitable for `st.pyplot` / `st.image`.
-- MUST NOT call Streamlit's `st.*` directly (that stays in `app.py` and
-  `pages/*`).
+- Pure functions that return matplotlib figures or numpy arrays suitable
+  for `st.pyplot` / `st.image`.
+- MUST NOT call Streamlit's `st.*` directly (that stays in `pages/*`).
 - MUST receive arrays as arguments; never read from session_state.
 
-Phase 1 status
---------------
-Placeholder package. Real modules added in Phase 3:
-image_viewer, matrix_viewer, mathematical_viewer,
-histogram, pca_plots, comparison.
+Phase 5 modules
+---------------
+- math_workspace  : three-level mathematical transparency renderer
+- comparison      : reusable before/after and side-by-side viewers
 """
