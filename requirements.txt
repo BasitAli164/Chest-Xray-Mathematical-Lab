@@ -1,5 +1,5 @@
 # =============================================================
-# Chest X-ray Mathematical Lab — Python Dependencies
+# Image Mathematical Lab — Python Dependencies
 # =============================================================
 
 # ---- Web application ----
@@ -9,7 +9,8 @@ streamlit==1.36.0
 groq>=0.9.0
 
 # ---- Arrow (Streamlit st.table dependency) ----
-pyarrow>=14.0.0,<26.0.0
+# IMPORTANT: pyarrow ko 15.0.0 par pin karein taake NumPy 2.0 ka conflict na ho
+pyarrow==15.0.0
 
 # ---- Numerical / scientific computing ----
 numpy==1.26.4
