@@ -1,34 +1,14 @@
-# =============================================================
-# Image Mathematical Lab — Python Dependencies
-# =============================================================
-
-# ---- Web application ----
 streamlit==1.36.0
-
-# ---- Generative AI ----
 groq>=0.9.0
-
-# ---- Arrow (Streamlit st.table dependency) ----
-# IMPORTANT: pyarrow ko 15.0.0 par pin karein taake NumPy 2.0 ka conflict na ho
 pyarrow==15.0.0
-
-# ---- Numerical / scientific computing ----
 numpy==1.26.4
 scipy==1.13.1
 scikit-image==0.23.2
 scikit-learn==1.5.0
-
-# ---- Image I/O ----
 opencv-python-headless==4.10.0.84
 Pillow==10.3.0
-
-# ---- Visualization ----
 matplotlib==3.9.0
 plotly==5.22.0
-
-# ---- Reporting ----
 pandas==2.2.2
 reportlab==4.2.0
-
-# ---- Testing ----
 pytest==8.2.2
